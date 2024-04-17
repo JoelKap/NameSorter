@@ -22,7 +22,8 @@ namespace NameSorted
                 if (File.Exists(file))
                 {
                     string names = File.ReadAllText(file);
-                    program._sort.SortByLastNameThenGivenNames(names);
+                    var orderedName = program._sort.SortByLastNameThenGivenNames(names);
+                    program._sort.SaveOrderedNamesToNewFile(orderedName);
                 }
             }
             catch (Exception exception)
