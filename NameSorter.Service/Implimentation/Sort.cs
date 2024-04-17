@@ -2,9 +2,10 @@
 {
     public class Sort : ISort
     {
-        public List<string> SortByLastNameThenGivenNames()
+        public void SortByLastNameThenGivenNames(string name)
         {
-            throw new NotImplementedException();
+            Console.WriteLine(name);
+            //throw new NotImplementedException();
         }
     }
 }

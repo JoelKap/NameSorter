@@ -2,6 +2,6 @@
 {
     public interface ISort
     {
-        List<string> SortByLastNameThenGivenNames();
+        void SortByLastNameThenGivenNames(string names);
     }
 }
