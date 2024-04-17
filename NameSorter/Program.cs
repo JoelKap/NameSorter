@@ -1,20 +1,28 @@
-﻿namespace NameSorted
+﻿using NameSorter.Service;
+using NameSorter.Service.Implimentation;
+
+namespace NameSorted
 {
     internal class Program
     {
+        private readonly ISort _sort;
+        public Program(ISort sort)
+        {
+            _sort = sort;
+        }
+       
         static void Main(string[] args)
         {
-            string data;
-            StreamReader streamReader = null;
+            Program program = new Program(new Sort());
+
+            string file = "C:\\unsorted-names-list.txt";
+
             try
             {
-                streamReader = new("C:\\unsorted-names-list.txt");
-                data = streamReader.ReadLine();
-
-                while (data != null)
+                if (File.Exists(file))
                 {
-                    Console.WriteLine(data);
-                    data = streamReader.ReadLine();
+                    string names = File.ReadAllText(file);
+                    program._sort.SortByLastNameThenGivenNames(names);
                 }
             }
             catch (Exception exception)
@@ -24,7 +32,7 @@
             }
             finally
             {
-                streamReader.Close();
+                //streamReader.Close();
             }
         }
     }
