@@ -1,10 +1,10 @@
 ﻿using NameSorter.Service;
 using NameSorter.Service.Implimentation;
 
-namespace NameSorted
+namespace NameSorter
 {
     internal class Program
-    {
+    { 
         private readonly ISort _sort;
         public Program(ISort sort)
         {
@@ -41,12 +41,8 @@ namespace NameSorted
             }
             catch (Exception exception)
             {
-
+                Console.WriteLine("An error occurred while processing the file:");
                 Console.WriteLine(exception.Message);
-            }
-            finally
-            {
-                //streamReader.Close();
             }
         }
     }
