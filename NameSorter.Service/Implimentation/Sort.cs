@@ -27,12 +27,13 @@ namespace NameSorter.Service.Implimentation
         
         public void SaveOrderedNamesToNewFile(List<NameModel> names)
         {
-            string path = "C:\\name-sorter.txt";
+            string executablePath = AppDomain.CurrentDomain.BaseDirectory;
+            string path = Path.Combine(executablePath, "name-sorter.txt");
 
             try
             {
                 if (File.Exists(path))
-                {
+                { 
                     WriteRecordsToFile(path, names);
                 }else
                 {
