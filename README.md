@@ -23,8 +23,10 @@ These instructions will get you a copy of the project up and running on your loc
    ```bash
    git clone https://github.com/yourusername/NameSorter.git
 2. Navigate to the project directory
+   ```bash
    cd NameSorter
 3. Build the project:
+   ```bash
    dotnet build
 
 ### Usage
@@ -32,11 +34,13 @@ Run the application using the following command:
 dotnet run --project NameSorter [path-to-input-file]
 
 Example:
+```bash
 dotnet run --project NameSorter ./unsorted-names-list.txt
 
 The sorted names will be displayed in the console and saved to sorted-names-list.txt in the same directory as the input file.
 
 ### Running the tests
 To run automated tests for this system:
+```bash
 dotnet test
 
