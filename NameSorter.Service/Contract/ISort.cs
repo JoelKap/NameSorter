@@ -2,7 +2,7 @@
 {
     public interface ISort
     {
-        List<NameModel> SortByLastNameThenGivenNames(string names);
-        void SaveOrderedNamesToNewFile(List<NameModel> names);
+        List<NameModel> SortByLastName(string names);
+        void SaveSortedNames(List<NameModel> names);
     }
 }

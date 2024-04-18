@@ -1,54 +1,42 @@
-﻿using System.IO;
-
-namespace NameSorter.Service.Implimentation
+﻿namespace NameSorter.Service.Implimentation
 {
     public class Sort : ISort
     {
-        private StreamWriter _writer;
-
-        public List<NameModel> SortByLastNameThenGivenNames(string namesString)
+        public List<NameModel> SortByLastName(string namesString)
         {
             List<NameModel> models = new();
             List<string> namesList = ConvertStringToList(namesString);
 
             foreach (var name in namesList)
             {
-                string lastName = name.Substring(name.LastIndexOf(' ') + 1);
-                string givenName = name.Substring(0, name.LastIndexOf(" "));
+                var (lastName, givenNames) = ExtractLastNameAndGivenNames(name);
 
-                var givenNames = givenName.Split(' ');
-                if (givenNames.Length > 3) continue;
+                if (givenNames.Split(' ').Length > 3) continue;
 
-                models.Add(CreateNewNameModel(lastName, givenName));
+                models.Add(CreateNameModel(lastName, givenNames));
             }
 
-            return models.OrderBy(name=> name.LastName).ToList();
+            return models.OrderBy(name => name.LastName).ToList();
         }
-        
-        public void SaveOrderedNamesToNewFile(List<NameModel> names)
-        {
-            string executablePath = AppDomain.CurrentDomain.BaseDirectory;
-            string path = Path.Combine(executablePath, "name-sorter.txt");
 
-            try
+        public void SaveSortedNames(List<NameModel> names)
+        {
+            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "name-sorter.txt");
+
+            try 
             {
-                if (File.Exists(path))
-                { 
-                    WriteRecordsToFile(path, names);
-                }else
+                using (StreamWriter writer = new(path, false))
                 {
-                    File.Create(path);
-                    WriteRecordsToFile(path, names);
+                    foreach (var name in names)
+                    {
+                        writer.WriteLine(name.FullName());
+                        Console.WriteLine(name.FullName());
+                    }
                 }
             }
             catch (Exception exception)
             {
-
-                Console.WriteLine(exception.Message);
-            }
-            finally
-            {
-                //streamReader.Close();
+                Console.WriteLine("Error while writing to file: " + exception.Message);
             }
         }
 
@@ -59,28 +47,21 @@ namespace NameSorter.Service.Implimentation
             return new List<string>(namesArray);
         }
 
-        private NameModel CreateNewNameModel(string lastName, string givenName)
+        private (string lastName, string givenNames) ExtractLastNameAndGivenNames(string name)
+        {
+            string lastName = name.Substring(name.LastIndexOf(' ') + 1);
+            string givenNames = name.Substring(0, name.LastIndexOf(" "));
+
+            return (lastName, givenNames);
+        }
+
+        private NameModel CreateNameModel(string lastName, string givenNames)
         {
             return new NameModel()
             {
                 LastName = lastName,
-                GivenNames = givenName
+                GivenNames = givenNames
             };
-        }
-
-        private void WriteRecordsToFile(string path, List<NameModel> models)
-        {
-            File.WriteAllText(path, String.Empty);
-
-            _writer = new StreamWriter(path);
-
-            foreach (var model in models)
-            {
-                _writer.WriteLine(model.FullName());
-                Console.WriteLine(model.FullName());
-            }
-
-            _writer.Close();
         }
     }
 }

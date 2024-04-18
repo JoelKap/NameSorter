@@ -30,8 +30,8 @@ namespace NameSorter
                 if (File.Exists(file))
                 {
                     string names = File.ReadAllText(file);
-                    var orderedName = program._sort.SortByLastNameThenGivenNames(names);
-                    program._sort.SaveOrderedNamesToNewFile(orderedName);
+                    var orderedName = program._sort.SortByLastName(names);
+                    program._sort.SaveSortedNames(orderedName);
                 }
                 else
                 {
