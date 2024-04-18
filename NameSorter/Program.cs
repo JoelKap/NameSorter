@@ -35,7 +35,8 @@ namespace NameSorted
                 }
                 else
                 {
-                    Console.WriteLine("File does not exist: " + file);
+                    Console.WriteLine($"The specified file does not exist: {file}");
+                    Console.WriteLine("Ensure that the file path is correct and the file is accessible.");
                 }
             }
             catch (Exception exception)
