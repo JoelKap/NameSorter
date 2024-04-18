@@ -5,15 +5,15 @@ namespace NameSorter
 {
     internal class Program
     { 
-        private readonly ISort _sort;
-        public Program(ISort sort)
+        private readonly INameProcessor _sort;
+        public Program(INameProcessor sort)
         {
             _sort = sort;
         }
 
         static void Main(string[] args)
         {
-            Program program = new Program(new Sort());
+            Program program = new Program(new NameProcessor());
 
             if (args.Length == 0)
             {

@@ -1,6 +1,6 @@
 ﻿namespace NameSorter.Service.Implimentation
 {
-    public class Sort : ISort
+    public class NameProcessor : INameProcessor
     {
         public List<NameModel> SortByLastName(string namesString)
         {
@@ -11,7 +11,7 @@
             {
                 var (lastName, givenNames) = ExtractLastNameAndGivenNames(name);
 
-                if (givenNames.Split(' ').Length > 3) continue;
+                if (givenNames.Split(' ').Length > 3) continue; 
 
                 models.Add(CreateNameModel(lastName, givenNames));
             }
