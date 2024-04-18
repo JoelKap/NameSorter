@@ -1,4 +1,4 @@
-﻿namespace NameSorter.Service.Implimentation
+﻿namespace NameSorter.Service
 {
     public class NameProcessor : INameProcessor
     {

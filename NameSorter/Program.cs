@@ -1,5 +1,4 @@
 ﻿using NameSorter.Service;
-using NameSorter.Service.Implimentation;
 
 namespace NameSorter
 {
