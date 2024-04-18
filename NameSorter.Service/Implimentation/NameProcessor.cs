@@ -19,10 +19,8 @@
             return models.OrderBy(name => name.LastName).ToList();
         }
 
-        public void SaveSortedNames(List<NameModel> names)
+        public void SaveSortedNames(List<NameModel> names, string path)
         {
-            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "name-sorter.txt");
-
             try 
             {
                 using (StreamWriter writer = new(path, false))
@@ -47,7 +45,7 @@
             return new List<string>(namesArray);
         }
 
-        private (string lastName, string givenNames) ExtractLastNameAndGivenNames(string name)
+        internal (string lastName, string givenNames) ExtractLastNameAndGivenNames(string name)
         {
             string lastName = name.Substring(name.LastIndexOf(' ') + 1);
             string givenNames = name.Substring(0, name.LastIndexOf(" "));

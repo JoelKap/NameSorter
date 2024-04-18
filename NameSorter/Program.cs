@@ -23,6 +23,7 @@ namespace NameSorter
             }
 
             string file = args[0];
+            string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "name-sorter.txt");
 
             try
             {
@@ -30,7 +31,7 @@ namespace NameSorter
                 {
                     string names = File.ReadAllText(file);
                     var orderedName = program._sort.SortByLastName(names);
-                    program._sort.SaveSortedNames(orderedName);
+                    program._sort.SaveSortedNames(orderedName, path);
                 }
                 else
                 {
