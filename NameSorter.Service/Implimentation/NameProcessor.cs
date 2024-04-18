@@ -16,7 +16,7 @@
                 models.Add(CreateNameModel(lastName, givenNames));
             }
 
-            return models.OrderBy(name => name.LastName).ToList();
+            return models.OrderBy(name => name.LastName).ThenBy(name=> name.GivenNames).ToList();
         }
 
         public void SaveSortedNames(List<NameModel> names, string path)
