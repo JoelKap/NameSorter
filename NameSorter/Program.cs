@@ -10,12 +10,20 @@ namespace NameSorted
         {
             _sort = sort;
         }
-       
+
         static void Main(string[] args)
         {
             Program program = new Program(new Sort());
 
-            string file = "C:\\unsorted-names-list.txt";
+            if (args.Length == 0)
+            {
+                Console.WriteLine("Usage: name-sorter <path-to-file>");
+                Console.WriteLine("Please provide the file path as an argument when executing the application.");
+                Console.WriteLine("Example: name-sorter ./unsorted-names-list.txt");
+                return;
+            }
+
+            string file = args[0];
 
             try
             {
@@ -24,6 +32,10 @@ namespace NameSorted
                     string names = File.ReadAllText(file);
                     var orderedName = program._sort.SortByLastNameThenGivenNames(names);
                     program._sort.SaveOrderedNamesToNewFile(orderedName);
+                }
+                else
+                {
+                    Console.WriteLine("File does not exist: " + file);
                 }
             }
             catch (Exception exception)
