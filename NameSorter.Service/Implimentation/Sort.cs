@@ -16,6 +16,9 @@ namespace NameSorter.Service.Implimentation
                 string lastName = name.Substring(name.LastIndexOf(' ') + 1);
                 string givenName = name.Substring(0, name.LastIndexOf(" "));
 
+                var givenNames = givenName.Split(' ');
+                if (givenNames.Length > 3) continue;
+
                 models.Add(CreateNewNameModel(lastName, givenName));
             }
 
