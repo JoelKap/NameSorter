@@ -10,4 +10,9 @@
     <ProjectReference Include="..\NameSorter.Model\NameSorter.Model.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>NameSorter.Test</_Parameter1>
+    </AssemblyAttribute>
+  </ItemGroup>
 </Project>
