@@ -31,6 +31,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Usage
 Run the application using the following command:
+```bash
 dotnet run --project NameSorter [path-to-input-file]
 
 Example:
