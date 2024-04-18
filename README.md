@@ -44,4 +44,3 @@ The sorted names will be displayed in the console and saved to sorted-names-list
 To run automated tests for this system:
 ```bash
 dotnet test
-
