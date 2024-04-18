@@ -1,7 +1,11 @@
-﻿namespace NameSorter.Service.Implimentation
+﻿using System.IO;
+
+namespace NameSorter.Service.Implimentation
 {
     public class Sort : ISort
     {
+        private StreamWriter _writer;
+
         public List<NameModel> SortByLastNameThenGivenNames(string namesString)
         {
             List<NameModel> models = new();
@@ -16,7 +20,33 @@
             }
 
             return models.OrderBy(name=> name.LastName).ToList();
-        } 
+        }
+        
+        public void SaveOrderedNamesToNewFile(List<NameModel> names)
+        {
+            string path = "C:\\name-sorter.txt";
+
+            try
+            {
+                if (File.Exists(path))
+                {
+                    WriteRecordsToFile(path, names);
+                }else
+                {
+                    File.Create(path);
+                    WriteRecordsToFile(path, names);
+                }
+            }
+            catch (Exception exception)
+            {
+
+                Console.WriteLine(exception.Message);
+            }
+            finally
+            {
+                //streamReader.Close();
+            }
+        }
 
         private static List<string> ConvertStringToList(string namesString)
         {
@@ -34,9 +64,19 @@
             };
         }
 
-        public void SaveOrderedNamesToNewFile(List<NameModel> names)
+        private void WriteRecordsToFile(string path, List<NameModel> models)
         {
-            throw new NotImplementedException();
+            File.WriteAllText(path, String.Empty);
+
+            _writer = new StreamWriter(path);
+
+            foreach (var model in models)
+            {
+                _writer.WriteLine(model.FullName());
+                Console.WriteLine(model.FullName());
+            }
+
+            _writer.Close();
         }
     }
 }
